@@ -1,6 +1,6 @@
 # Rubab
 
-A web music player built with VueJS. The name is taken from an Afghan instrument.
+A web music player built with VueJS and inspired by Spotify. The name is taken from an Afghan instrument 'Rubab'.
 
 ## Contribution 
 
