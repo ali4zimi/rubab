@@ -56,7 +56,7 @@
 
 <style scoped>
 .player {
-    @apply w-full min-h-[80px] p-3 fixed left-0 bottom-0 right-0
+    @apply w-full h-[80px] p-3 fixed left-0 bottom-0 right-0 z-30
     bg-gray-400 flex justify-between items-center;
 }
 

@@ -2,11 +2,27 @@
 import { RouterLink, RouterView } from 'vue-router'
 import Navbar from './components/Navbar.vue';
 import MusicPlayer from './components/MusicPlayer.vue'
+import Sidebar from './components/Sidebar.vue'
 </script>
 
 <template>
+  <Navbar />
+  <MusicPlayer />
+
   <main>
-    <Navbar />
-    <MusicPlayer />
+    <Sidebar />
+
+    <div class="content">
+      <RouterView />
+    </div>
   </main>
 </template>
+
+<style scoped>
+main {
+  @apply fixed top-[80px] bottom-[90px] left-[10px] right-[10px] z-10 flex gap-2;
+}
+.content {
+  @apply w-full p-3 bg-slate-100 rounded-md;
+}
+</style>
