@@ -1,4 +1,6 @@
 <script setup>
+defineProps(["list"]);
+
 import PlayIcon from './icons/PlayIcon.vue'
 </script>
 
@@ -8,8 +10,9 @@ import PlayIcon from './icons/PlayIcon.vue'
             <h2 class="text-2xl font-semibold">Featured Album</h2>
         </div>
         <div class="shelf-content">
-            <div class="shelf-item" v-for="i in 4">
-                <div class="item-art">
+            <div class="shelf-item" v-for="item in list">
+                <div class="item-image">
+                    <img :src="item.cover" class="w-full h-full rounded-md" />
                     <div class="overlay">
                         <PlayIcon width="60" height="60" />
                     </div>
@@ -17,10 +20,10 @@ import PlayIcon from './icons/PlayIcon.vue'
 
                 <div class="item-details">
                     <div class="item-title">
-                        Item {{ i }}
+                        {{ item.title  }}
                     </div>
                     <div class="item-description">
-                        Description {{ i + 99 }}
+                        {{ item.artist }}
                     </div>
                 </div>
             </div>
@@ -49,15 +52,15 @@ import PlayIcon from './icons/PlayIcon.vue'
   @apply bg-slate-300 transition-colors
 }
 
-.item-art {
+.item-image {
   @apply relative w-full aspect-square bg-slate-400 rounded-md
 }
 
 .overlay {
-    @apply absolute bottom-1 right-1 hidden
+    @apply absolute bottom-1 right-1 hidden z-10
 }
 
-.item-art:hover .overlay {
+.shelf-item:hover .overlay {
     @apply block
 }
 

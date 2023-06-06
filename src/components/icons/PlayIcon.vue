@@ -1,10 +1,19 @@
 <script setup>
-defineProps(["width", "height"])
+defineProps({
+    width: {
+        type: String,
+        default: 20
+    },
+    height: {
+        type: String,
+        default: 20
+    }
+})
 </script>
 
 <template>
     <div class="play">
-        <svg xmlns="http://www.w3.org/2000/svg" :width="width | 20" :height="height | 20" viewBox="0 0 24 24">
+        <svg xmlns="http://www.w3.org/2000/svg" :width="width" :height="height" viewBox="0 0 24 24">
             <path fill="currentColor"
                 d="M10 16.5v-9l6 4.5M12 2A10 10 0 0 0 2 12a10 10 0 0 0 10 10a10 10 0 0 0 10-10A10 10 0 0 0 12 2Z" />
         </svg>

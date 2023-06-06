@@ -1,14 +1,20 @@
 <script setup>
-
-defineProps(["width", "height"])
-
+defineProps({
+    width: {
+        type: String,
+        default: 20
+    },
+    height: {
+        type: String,
+        default: 20
+    }
+})
 </script>
 
 <template>
-    <div class="volume-high">
-        <svg xmlns="http://www.w3.org/2000/svg" :width="width | 20" height="height | 20" viewBox="0 0 24 24">
-            <path fill="currentColor"
-                d="M3 9v6h4l5 5V4L7 9H3zm13.5 3A4.5 4.5 0 0 0 14 7.97v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z" />
-        </svg>
-    </div>
+    <svg xmlns="http://www.w3.org/2000/svg" :width="width" :height="height" viewBox="0 0 512 512">
+        <path fill="none" stroke="currentColor" stroke-linecap="square" stroke-miterlimit="10" stroke-width="32"
+            d="M320 320c9.74-19.38 16-40.84 16-64c0-23.48-6-44.42-16-64m48 176c19.48-33.92 32-64.06 32-112s-12-77.74-32-112m48 272c30-46 48-91.43 48-160s-18-113-48-160" />
+        <path fill="currentColor" d="M125.65 176.1H32v159.8h93.65L256 440V72L125.65 176.1z" />
+    </svg>
 </template>

@@ -2,14 +2,64 @@
 
 import SectionShelf from '@/components/SectionShelf.vue';
 
+// music album with cover, title, artist, and year
 const topAlbums = [
-  {"name": "Album 1"},
-  {"name": "Album 2"},
-  {"name": "Album 3"},
-  {"name": "Album 4"},
-  {"name": "Album 5"},
-  {"name": "Album 6"},
-  {"name": "Album 7"},
+  {
+    id: 1,
+    cover: 'https://picsum.photos/200/300',
+    title: 'The Greatest Hits',
+    artist: 'Queen',
+    year: 1981,
+  },
+  {
+    id: 2,
+    cover: 'https://picsum.photos/200/300',
+    title: 'The Greatest Hits',
+    artist: 'Queen',
+    year: 1981,
+  },
+  {
+    id: 3,
+    cover: 'https://picsum.photos/200/300',
+    title: 'The Greatest Hits',
+    artist: 'Queen',
+    year: 1981,
+  },
+  {
+    id: 4,
+    cover: 'https://picsum.photos/200/300',
+    title: 'The Greatest Hits',
+    artist: 'Queen',
+    year: 1981,
+  },
+  {
+    id: 5,
+    cover: 'https://picsum.photos/200/300',
+    title: 'The Greatest Hits',
+    artist: 'Queen',
+    year: 1981,
+  },
+  {
+    id: 6,
+    cover: 'https://picsum.photos/200/300',
+    title: 'The Greatest Hits',
+    artist: 'Queen',
+    year: 1981,
+  },
+  {
+    id: 7,
+    cover: 'https://picsum.photos/200/300',
+    title: 'The Greatest Hits',
+    artist: 'Queen',
+    year: 1981,
+  },
+  {
+    id: 8,
+    cover: 'https://picsum.photos/200/300',
+    title: 'The Greatest Hits',
+    artist: 'Queen',
+    year: 1981,
+  }
 ]
 
 </script>
@@ -17,7 +67,7 @@ const topAlbums = [
 <template>
   <div class="w-full">
 
-    <SectionShelf />
+    <SectionShelf :list="topAlbums" />
 
   </div>
 </template>
