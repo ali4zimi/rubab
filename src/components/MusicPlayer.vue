@@ -8,24 +8,24 @@ import NextIcon from './icons/NextIcon.vue'
 import RepeatIcon from './icons/RepeatIcon.vue'
 import VolumeController from './VolumeController.vue'
 
-// onMounted(() => {
-//     const progressBar = document.querySelector('.progressbar');
-//     const progressBarFill = document.querySelector('.progressbar-fill');
-// })
+const progressPosition = ref(10);
+const progressSlider = ref(null);
+const progressSliderFill = ref(null);
+const progressSliderThumb = ref(null);
 
-const progress = ref(0)
-const progressBar = ref(null);
-const progressBarFill = ref(null);
-const playbackPosition = ref(null);
-const playbackLength = ref(null);
+onMounted(() => {
+    progressSliderFill.value.style.width = `${progressPosition.value}px`;
+    progressSliderThumb.value.style.left = `${progressPosition.value}px`;
+})
 
 
 const updateProgressbar = (e) => {
     const value = e.target.value;
-    const progressBarWidth = progressBar.value.offsetWidth;
-    const progress = (value / 100) * progressBarWidth;
-    progressBarFill.value.style.width = `${progress}px`;
-    playbackPosition.value.innerHTML = value;
+    const sliderWidth = progressSlider.value.offsetWidth;
+    const progress = (value / 100) * sliderWidth;
+    progressSliderFill.value.style.width = `${progress}px`;
+    progressSliderThumb.value.style.left = `${progress}px`;
+    progressPosition.value = value;
 }
 
 
@@ -64,17 +64,22 @@ const updateProgressbar = (e) => {
                 <NextIcon width="20" height="20" />
                 <RepeatIcon width="20" height="20" />
             </div>
-            <div class="playback-progressbar">
-                <div ref="playbackPosition" class="absolute left-[-20px]">0</div>
-                <div ref="playbackLength" class="absolute right-[-20px]">100</div>
+            <div class="relative flex justify-center">
+                <!-- <div ref="playbackPosition" class="absolute left-[-20px]">0</div> -->
 
-                <div class="progressbar" ref="progressBar">
-                    <div class="progressbar-fill" ref="progressBarFill" :style="'width:' + progress + '%'">
+                <div class="playback-progressbar">
+                    <div class="progress-slider-wrapper">
+                        <div ref="progressSlider" class="progress-slider">
+                            <div ref="progressSliderFill" class="progress-slider-fill"></div>
+                        </div>
+                        <div ref="progressSliderThumb" class="progress-slider-thumb"></div>
                     </div>
+                    <input class="progress-range" type="range" :value="progressPosition" @input="updateProgressbar" />
                 </div>
-                <div class="range-wrapper">
-                    <input type="range" class="range" :value="progress" @input="updateProgressbar" />
-                </div>
+
+                <!-- <div ref="playbackLength" class="absolute right-[-20px]">100</div> -->
+
+
             </div>
         </div>
         <div class="other-options">
@@ -97,22 +102,37 @@ const updateProgressbar = (e) => {
 }
 
 .playback-progressbar {
-    @apply relative w-full flex justify-center items-center
+    @apply relative w-full h-[20px] flex items-center
 }
 
-.progressbar {
-    @apply absolute w-full h-1 bg-slate-300 rounded-md
+.progress-slider-wrapper {
+    @apply w-full relative px-[8px]
 }
 
-.progressbar-fill {
-    @apply absolute top-0 left-0 h-1 bg-slate-50  rounded-md
+.progress-slider {
+    @apply w-full h-1 bg-slate-300 rounded-md
 }
 
-.range-wrapper {
-    @apply relative w-full min-h-[15px]
+.progress-slider-fill {
+    @apply h-1 bg-slate-50 rounded-md
 }
-.range {
-    @apply opacity-0 absolute left-[-7px] right-[-7.5px]
+
+
+.progress-slider-thumb {
+    @apply absolute left-0 w-[15px] aspect-square 
+    bg-slate-50 rounded-full opacity-0 transition-opacity duration-300;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.progress-range {
+    @apply w-full absolute opacity-0;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.playback-progressbar:hover .progress-slider-thumb {
+    @apply opacity-100
 }
 
 .buttons {
@@ -122,5 +142,4 @@ const updateProgressbar = (e) => {
 .other-options {
     @apply w-4/12 flex justify-end
 }
-
 </style>
