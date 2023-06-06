@@ -23,6 +23,6 @@ main {
   @apply fixed top-[80px] bottom-[90px] left-[10px] right-[10px] z-10 flex gap-2;
 }
 .content {
-  @apply w-full p-3 bg-slate-100 rounded-md;
+  @apply w-9/12 p-3 bg-slate-100 rounded-md;
 }
 </style>

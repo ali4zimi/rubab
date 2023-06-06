@@ -1,5 +1,7 @@
 <script setup lang="ts">
 
+import SectionShelf from '@/components/SectionShelf.vue';
+
 const topAlbums = [
   {"name": "Album 1"},
   {"name": "Album 2"},
@@ -13,7 +15,14 @@ const topAlbums = [
 </script>
 
 <template>
-  <div>
-    Hi
+  <div class="w-full">
+
+    <SectionShelf />
+
   </div>
 </template>
+
+<style scoped>
+
+
+</style>

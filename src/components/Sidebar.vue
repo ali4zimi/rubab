@@ -24,7 +24,7 @@ const list = [
 
 <style scoped>
 .sidebar {
-  @apply relative w-4/12 h-full p-3 bg-slate-100 rounded-md overflow-hidden
+  @apply relative w-3/12 h-full p-3 bg-slate-100 rounded-md overflow-hidden
 }
 
 .my-list {
