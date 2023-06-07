@@ -41,7 +41,7 @@ import PlayIcon from './icons/PlayIcon.vue'
 }
 
 .shelf-content {
-  @apply w-full flex gap-3
+  @apply w-full flex gap-3 overflow-x-scroll
 }
 
 .shelf-item {

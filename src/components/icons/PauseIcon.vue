@@ -13,9 +13,9 @@ defineProps({
 
 <template>
     <div class="play">
-        <svg xmlns="http://www.w3.org/2000/svg" :width="width" :height="height" viewBox="0 0 24 24">
+        <svg xmlns="http://www.w3.org/2000/svg" :width="width" :height="width" viewBox="0 0 512 512">
             <path fill="currentColor"
-                d="M10 16.5v-9l6 4.5M12 2A10 10 0 0 0 2 12a10 10 0 0 0 10 10a10 10 0 0 0 10-10A10 10 0 0 0 12 2Z" />
+                d="M256 48C141.31 48 48 141.31 48 256s93.31 208 208 208s208-93.31 208-208S370.69 48 256 48Zm-32 288h-32V176h32Zm96 0h-32V176h32Z" />
         </svg>
     </div>
 </template>

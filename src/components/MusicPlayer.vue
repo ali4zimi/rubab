@@ -1,45 +1,124 @@
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, reactive, onMounted } from 'vue'
 
 import PlayIcon from './icons/PlayIcon.vue'
+import PauseIcon from './icons/PauseIcon.vue'
 import ShuffleIcon from './icons/ShuffleIcon.vue'
 import PreviousIcon from './icons/PreviousIcon.vue'
 import NextIcon from './icons/NextIcon.vue'
 import RepeatIcon from './icons/RepeatIcon.vue'
 import VolumeController from './VolumeController.vue'
 
-const progressPosition = ref(10);
+
+const progressPosition = ref(0);
+
+// Elements
 const progressSlider = ref(null);
 const progressSliderFill = ref(null);
 const progressSliderThumb = ref(null);
 
-onMounted(() => {
-    progressSliderFill.value.style.width = `${progressPosition.value}px`;
-    progressSliderThumb.value.style.left = `${progressPosition.value}px`;
-})
 
 
-const updateProgressbar = (e) => {
+const syncProgressbar = (e) => {
     const value = e.target.value;
     const sliderWidth = progressSlider.value.offsetWidth;
     const progress = (value / 100) * sliderWidth;
     progressSliderFill.value.style.width = `${progress}px`;
     progressSliderThumb.value.style.left = `${progress}px`;
+
+    if (player.dragStarted) return;
     progressPosition.value = value;
 }
 
+const updateProgressbar = (e) => {
+    const value = e.target.value;
+    const sliderWidth = progressSlider.value.offsetWidth;
+    const progress = (value / 100)* sliderWidth;
+    progressSliderFill.value.style.width = `${progress}px`;
+    progressSliderThumb.value.style.left = `${progress}px`;
+    progressPosition.value = value;
+    audio.value.currentTime = (value / 100) * audio.value.duration;
+    player.dragStarted = false;
+}
+
+const player = reactive({
+    playing: false,
+    shuffle: false,
+    repeat: false,
+    now: {
+        title: 'Sample Track',
+        album: 'S. Album',
+        cover: 'https://picsum.photos/200/200',
+        file: '/library/track1.mp3',
+    },
+    playbackPosition: '0:00',
+    playbackLength: '0:00',
+    dragStarted: false,
+    volume: 50,
+})
 
 
+
+const audio = ref(null);
+
+
+
+const play = () => {
+    if (player.playing) {
+        audio.value.pause();
+    } else {
+        audio.value.play();
+    }
+    player.playing = !player.playing;
+}
+
+onMounted(() => {
+    progressSliderFill.value.style.width = `${progressPosition}px`;
+    progressSliderThumb.value.style.left = `${progressPosition}px`;
+
+    audio.value = new Audio(player.now.file);
+    audio.value.volume = player.volume / 100;
+    audio.value.addEventListener('loadedmetadata', () => {
+        const { duration } = audio.value;
+
+        let seconds = Math.floor(duration % 60);
+        let minutes = Math.floor(duration / 60);
+        let hours = Math.floor(duration / 3600);
+        player.playbackLength = `${hours > 0 ? `${hours}:` : ''}${minutes}:${seconds}`;
+    })
+    audio.value.addEventListener('timeupdate', () => {
+        if (player.dragStarted) return;
+        const { currentTime, duration } = audio.value;
+        const progress = (currentTime / duration) * 100;
+        progressSliderFill.value.style.width = `${progress}%`;
+        progressSliderThumb.value.style.left = `${progress}%`;
+        progressPosition.value = progress;
+        
+        let seconds = Math.floor(currentTime % 60);
+        let minutes = Math.floor(currentTime / 60);
+        let hours = Math.floor(currentTime / 3600);
+
+        if (seconds < 10) seconds = `0${seconds}`;
+
+        player.playbackPosition =   `${hours > 0 ? `${hours}:` : ''}${minutes}:${seconds}`;
+
+
+    })
+    audio.value.addEventListener('ended', () => {
+        player.playing = false;
+    })
+})
 </script>
 
 <template>
     <div class="player">
         <div class="now-playing">
             <div class="w-14 h-14 bg-green-400 rounded-md">
+                <img :src="player.now.cover" class="w-full h-full rounded-md" />
             </div>
             <div class="details">
-                <div>Title</div>
-                <div>Album</div>
+                <div>{{ player.now.title }}</div>
+                <div>{{ player.now.album }}</div>
             </div>
             <div>
                 <div v-if="false">
@@ -60,30 +139,33 @@ const updateProgressbar = (e) => {
             <div class="buttons">
                 <ShuffleIcon width="20" height="20" />
                 <PreviousIcon width="20" height="20" />
-                <PlayIcon width="45" height="45" class="text-green-500" />
+                <div class="playpause-button">
+                    <PlayIcon width="45" height="45" class="text-green-500" @click="play" v-if="audio && audio.paused" />
+                    <PauseIcon width="45" height="45" class="text-green-500" @click="play" v-else  />
+                </div>
                 <NextIcon width="20" height="20" />
                 <RepeatIcon width="20" height="20" />
             </div>
-            <div class="relative flex justify-center">
-                <!-- <div ref="playbackPosition" class="absolute left-[-20px]">0</div> -->
+            <div class="relative flex justify-center items-center">
+                <div ref="playbackPosition" class="playback-position">{{ player.playbackPosition }}</div>
 
                 <div class="playback-progressbar">
                     <div class="progress-slider-wrapper">
                         <div ref="progressSlider" class="progress-slider">
                             <div ref="progressSliderFill" class="progress-slider-fill"></div>
+                            <div ref="progressSliderThumb" class="progress-slider-thumb"></div>
                         </div>
-                        <div ref="progressSliderThumb" class="progress-slider-thumb"></div>
                     </div>
-                    <input class="progress-range" type="range" :value="progressPosition" @input="updateProgressbar" />
+                    <input class="progress-range" type="range" :value="progressPosition" @input="syncProgressbar" @mousedown="player.dragStarted = true" @mouseup="updateProgressbar" />
                 </div>
 
-                <!-- <div ref="playbackLength" class="absolute right-[-20px]">100</div> -->
+                <div ref="playbackLength" class="playback-length">{{ player.playbackLength }}</div>
 
 
             </div>
         </div>
         <div class="other-options">
-            <VolumeController />
+            <VolumeController :volumeLevel="0.2" @update:volumeLevel="audio.volume = $event" />
         </div>
     </div>
 </template>
@@ -101,6 +183,10 @@ const updateProgressbar = (e) => {
     @apply w-4/12
 }
 
+.buttons {
+    @apply flex justify-center items-center gap-2
+}
+
 .playback-progressbar {
     @apply relative w-full h-[20px] flex items-center
 }
@@ -110,19 +196,19 @@ const updateProgressbar = (e) => {
 }
 
 .progress-slider {
-    @apply w-full h-1 bg-slate-300 rounded-md
+    @apply w-full h-1 relative bg-slate-300 rounded-md
 }
 
 .progress-slider-fill {
-    @apply h-1 bg-slate-50 rounded-md
+    @apply w-1 h-1 bg-slate-50 rounded-md
 }
 
 
 .progress-slider-thumb {
-    @apply absolute left-0 w-[15px] aspect-square 
-    bg-slate-50 rounded-full opacity-0 transition-opacity duration-300;
+    @apply absolute left-0 w-[12px] aspect-square bg-slate-50 rounded-full opacity-0 transition-opacity duration-300;
     top: 50%;
     transform: translateY(-50%);
+    margin-left: -6px;
 }
 
 .progress-range {
@@ -135,8 +221,10 @@ const updateProgressbar = (e) => {
     @apply opacity-100
 }
 
-.buttons {
-    @apply flex justify-center items-center gap-2
+.playback-position,
+.playback-length {
+    @apply text-gray-600;
+    font-size: 12px;
 }
 
 .other-options {
