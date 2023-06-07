@@ -200,7 +200,7 @@ onMounted(() => {
 }
 
 .progress-slider-fill {
-    @apply w-1 h-1 bg-slate-50 rounded-md
+    @apply w-0 h-1 bg-slate-50 rounded-md
 }
 
 

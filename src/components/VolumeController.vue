@@ -14,6 +14,8 @@ const props = defineProps({
 
 const volumeLevel = ref(props.volumeLevel);
 
+// can't use volumeLevel directly I don't know why. However, I initialized a separate variable to store the props value
+
 const localVolume = ref(0);
 const lastVolume = ref(0);
 const isMuted = ref(false);
