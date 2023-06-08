@@ -46,10 +46,11 @@ const player = reactive({
     shuffle: false,
     repeat: false,
     now: {
-        title: 'Sample Track',
-        album: 'S. Album',
+        title: 'Summertime',
+        artist: 'Hottam',
+        album: '',
         cover: 'https://picsum.photos/200/200',
-        file: '/library/track1.mp3',
+        file: '/library/track-1.mp3',
     },
     playbackPosition: '0:00',
     playbackLength: '0:00',
@@ -203,7 +204,7 @@ onMounted(() => {
     @apply w-0 h-1 bg-slate-50 rounded-md
 }
 
-
+tg
 .progress-slider-thumb {
     @apply absolute left-0 w-[12px] aspect-square bg-slate-50 rounded-full opacity-0 transition-opacity duration-300;
     top: 50%;
