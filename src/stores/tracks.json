@@ -1,0 +1,30 @@
+[
+    {
+        "title": "Summertime",
+        "artist": "Hottam",
+        "album": "",
+        "cover": "https://picsum.photos/200/200",
+        "path": "/library/track-1.mp3"
+    },
+    {
+        "title": "Run Free",
+        "artist": "Hottam",
+        "album": "",
+        "cover": "https://picsum.photos/200/200",
+        "path": "/library/track-2.mp3"
+    },
+    {
+        "title": "Do It",
+        "artist": "Hottam",
+        "album": "",
+        "cover": "https://picsum.photos/200/200",
+        "path": "/library/track-3.mp3"
+    },
+    {
+        "title": "Carefree",
+        "artist": "Hottam",
+        "album": "",
+        "cover": "https://picsum.photos/200/200",
+        "path": "/library/track-4.mp3"
+    }
+]
