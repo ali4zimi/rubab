@@ -1,5 +1,5 @@
 <script setup>
-import { ref, reactive, onMounted } from 'vue'
+import { ref, reactive, onMounted, watch } from 'vue'
 
 import PlayIcon from './icons/PlayIcon.vue'
 import PauseIcon from './icons/PauseIcon.vue'
@@ -41,23 +41,37 @@ const updateProgressbar = (e) => {
     player.dragStarted = false;
 }
 
-const player = reactive({
-    playing: false,
-    shuffle: false,
-    repeat: false,
-    now: {
-        title: 'Summertime',
-        artist: 'Hottam',
-        album: '',
-        cover: 'https://picsum.photos/200/200',
-        file: '/library/track-1.mp3',
-    },
-    playbackPosition: '0:00',
-    playbackLength: '0:00',
-    dragStarted: false,
-    volume: 50,
+
+
+
+import { useMusicLibrary } from '@/stores/player.ts';
+const player = useMusicLibrary();
+
+
+// watch player.currentTrack and update audio
+
+watch(() => player.currentTrack, (track) => {
+    if (!audio.value) return;
+    player.playing = false; 
+    audio.value.pause();
+    audio.value.src = track.path;
+    console.log(audio.value.src);
+    play();
 })
 
+watch(() => player.playing, (playing) => {
+    if (!audio.value) return;
+    if (playing) {
+        audio.value.play();
+    } else {
+        audio.value.pause();
+    }
+})
+
+watch(() => player.volume, (volume) => {
+    if (!audio.value) return;
+    audio.value.volume = volume;
+})
 
 
 const audio = ref(null);
@@ -77,8 +91,8 @@ onMounted(() => {
     progressSliderFill.value.style.width = `${progressPosition}px`;
     progressSliderThumb.value.style.left = `${progressPosition}px`;
 
-    audio.value = new Audio(player.now.file);
-    audio.value.volume = player.volume / 100;
+    audio.value = new Audio(player.currentTrack.path);
+    audio.value.volume = player.volume;
     audio.value.addEventListener('loadedmetadata', () => {
         const { duration } = audio.value;
 
@@ -115,11 +129,13 @@ onMounted(() => {
     <div class="player">
         <div class="now-playing">
             <div class="w-14 h-14 bg-green-400 rounded-md">
-                <img :src="player.now.cover" class="w-full h-full rounded-md" />
+                <img :src="player.currentTrack.cover" class="w-full h-full rounded-md" />
             </div>
             <div class="details">
-                <div>{{ player.now.title }}</div>
-                <div>{{ player.now.album }}</div>
+                <div>{{ player.currentTrack.title }}</div>
+                <div v-if="player.currentTrack.album">{{ player.currentTrack.album }}</div>
+                <div v-else-if="player.currentTrack.artist">{{ player.currentTrack.artist }}</div>
+                <div v-else>Unknown</div>
             </div>
             <div>
                 <div v-if="false">
@@ -141,7 +157,7 @@ onMounted(() => {
                 <ShuffleIcon width="20" height="20" />
                 <PreviousIcon width="20" height="20" />
                 <div class="playpause-button">
-                    <PlayIcon width="45" height="45" class="text-green-500" @click="play" v-if="audio && audio.paused" />
+                    <PlayIcon width="45" height="45" class="text-green-500" @click="play" v-if="audio && !player.playing" />
                     <PauseIcon width="45" height="45" class="text-green-500" @click="play" v-else  />
                 </div>
                 <NextIcon width="20" height="20" />

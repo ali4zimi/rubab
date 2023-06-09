@@ -11,7 +11,7 @@ const list = [
         <h1 class="font-semibold">My Library</h1>
 
         <div class="my-list">
-            <div class="list-item" v-for="i in 30">
+            <div class="list-item" v-for="i in 3">
                 <div class="track-art"></div>
                 <div class="track-detail">
                     <div>Title {{ i }}</div>

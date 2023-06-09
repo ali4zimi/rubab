@@ -2,15 +2,20 @@
 defineProps(["list"]);
 
 import PlayIcon from './icons/PlayIcon.vue'
+
+import { useMusicLibrary } from '@/stores/player.ts';
+const player = useMusicLibrary();
+
+
 </script>
 
 <template>
     <section class="shelf">
         <div class="shelf-header">
-            <h2 class="text-2xl font-semibold">Featured Album</h2>
+            <h2 class="text-2xl font-semibold">Featured Tracks</h2>
         </div>
         <div class="shelf-content">
-            <div class="shelf-item" v-for="item in list">
+            <div class="shelf-item" v-for="item in list" @click="player.playTrack(item)">
                 <div class="item-image">
                     <img :src="item.cover" class="w-full h-full rounded-md" />
                     <div class="overlay">
