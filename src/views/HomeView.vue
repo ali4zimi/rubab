@@ -3,8 +3,8 @@ import { ref } from 'vue';
 
 import SectionShelf from '@/components/SectionShelf.vue';
 
-import { useMusicStore } from '@/stores/music.ts';
-import { useMusicLibrary } from '@/stores/player.ts';
+import { useMusicStore } from '@/stores/music';
+import { useMusicLibrary } from '@/stores/player';
 
 const music = useMusicStore();
 const player = useMusicLibrary();
