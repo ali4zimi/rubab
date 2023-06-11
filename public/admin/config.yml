@@ -6,17 +6,18 @@ media_folder: public/library
 public_folder: /library
 
 collections:
-  - label: Tracks
-    name: tracks
-    folder: public/library
-    create: true
-    slug: "{{slug}}"
-    fields:
-      - {label: Title, name: title, widget: string}
-      - {label: Description, name: description, widget: text, required: false}
-      - {label: Language, name: language, widget: select, options: [{label: English, value: en}, {label: German, value: de}, {label: فارسی, value: fa}], default: en}
-      - {label: Tags, name: tags, widget: list, required: false}
-      - {label: Hero Image, name: hero_image, widget: image, required: false}
-      - {label: Draft, name: draft, widget: boolean, required: false}
-      - {label: Date, name: date, widget: datetime}
-      - {label: Body, name: body, widget: markdown}
+  - label: Music Library
+    name: library
+    file: public/library.json
+    - label: Tracks
+      name: tracks
+      widget: list
+      fields:
+        - {label: Title, name: title, widget: string}
+        - {label: Artist, name: artist, widget: string}
+        - {label: Album, name: album, widget: string}
+        - {label: Cover, name: cover_image, widget: image, required: false}
+        - {label: Audio, name: audio_file, widget: file, required: false}
+        - {label: Description, name: description, widget: markdown}
+        - {label: Date, name: date, widget: datetime}
+        - {label: Tags, name: tags, widget: list, required: false}
