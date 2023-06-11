@@ -1,13 +1,16 @@
 import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
+import { type Track } from './types'
 import tracksFile from './tracks.json'
 
 
 export const useMusicLibrary = defineStore('MusicLibrary', () => {
-  const tracks = ref(tracksFile as Track[]);
   const myLibrary = ref<Track[]>([]);
 
+
+  const tracks = ref(tracksFile as Track[]);
   const currentTrack = ref(tracks.value[0]);
+  
 
   const volume = ref(0.5);
   const playing = ref(false);
@@ -21,15 +24,6 @@ export const useMusicLibrary = defineStore('MusicLibrary', () => {
   function playTrack(track: Track) {
     currentTrack.value = track;
     playing.value = true;
-  }
-
-
-  interface Track {
-    title: string;
-    artist: string;
-    album: string;
-    cover: string;
-    path: string;
   }
 
   return { tracks, myLibrary, currentTrack, volume, playing, shuffle, repeat, playbackPosition, playbackLength, playTrack }
