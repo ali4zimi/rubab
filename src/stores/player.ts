@@ -4,7 +4,7 @@ import { type Track } from './types'
 import tracksFile from './tracks.json'
 
 
-export const useMusicLibrary = defineStore('MusicLibrary', () => {
+export const useMusicPlayer = defineStore('MusicPlayer', () => {
   const tracks = ref(tracksFile as Track[]);
   const currentTrack = ref(tracks.value[0]);
   

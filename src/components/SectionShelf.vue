@@ -3,8 +3,8 @@ defineProps(["list"]);
 
 import PlayIcon from './icons/PlayIcon.vue'
 
-import { useMusicLibrary } from '@/stores/player.ts';
-const player = useMusicLibrary();
+import { useMusicPlayer } from '@/stores/player.ts';
+const player = useMusicPlayer();
 
 
 </script>

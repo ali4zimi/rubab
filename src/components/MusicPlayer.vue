@@ -44,8 +44,8 @@ const updateProgressbar = (e) => {
 
 
 
-import { useMusicLibrary } from '@/stores/player.ts';
-const player = useMusicLibrary();
+import { useMusicPlayer } from '@/stores/player.ts';
+const player = useMusicPlayer();
 
 import { useUserStore } from '@/stores/user.ts';
 
@@ -225,7 +225,6 @@ onMounted(() => {
     @apply w-0 h-1 bg-slate-50 rounded-md
 }
 
-tg
 .progress-slider-thumb {
     @apply absolute left-0 w-[12px] aspect-square bg-slate-50 rounded-full opacity-0 transition-opacity duration-300;
     top: 50%;
