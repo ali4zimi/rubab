@@ -1,8 +1,10 @@
 <script setup>
 
-const list = [
-    { }
-]
+import { useUserStore } from '@/stores/user';
+
+const user = useUserStore();
+
+
 
 </script>
 
@@ -11,13 +13,14 @@ const list = [
         <h1 class="font-semibold">My Library</h1>
 
         <div class="my-list">
-            <div class="list-item" v-for="i in 3">
+            <router-link :to="`/playlist/${playlist.slug}`" class="list-item" v-for="playlist in user.playlists" :key="playlist.id">
+                
                 <div class="track-art"></div>
                 <div class="track-detail">
-                    <div>Title {{ i }}</div>
-                    <div>Album</div>
+                    <div>{{ playlist.name }}</div>
+                    <div>{{ playlist.tracks.length }}</div>
                 </div>
-            </div>
+            </router-link>
         </div>
     </div>
 </template>

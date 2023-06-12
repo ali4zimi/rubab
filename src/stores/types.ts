@@ -9,6 +9,7 @@ interface Track {
 
 interface Playlist {
     name: string;
+    slug: string;
     tracks: Track[];
 }
 

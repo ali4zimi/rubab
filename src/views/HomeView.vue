@@ -7,7 +7,6 @@ import { useMusicStore } from '@/stores/music';
 import { useMusicLibrary } from '@/stores/player';
 
 const music = useMusicStore();
-const player = useMusicLibrary();
 
 const topTracks = music.tracks;
 

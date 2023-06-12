@@ -5,9 +5,6 @@ import tracksFile from './tracks.json'
 
 
 export const useMusicLibrary = defineStore('MusicLibrary', () => {
-  const myLibrary = ref<Track[]>([]);
-
-
   const tracks = ref(tracksFile as Track[]);
   const currentTrack = ref(tracks.value[0]);
   
@@ -20,11 +17,26 @@ export const useMusicLibrary = defineStore('MusicLibrary', () => {
   const playbackPosition = ref(0);
   const playbackLength = ref(0);
 
+  const audio = new Audio();
+
+  audio.addEventListener('timeupdate', () => {
+  });
+
 
   function playTrack(track: Track) {
     currentTrack.value = track;
     playing.value = true;
   }
 
-  return { tracks, myLibrary, currentTrack, volume, playing, shuffle, repeat, playbackPosition, playbackLength, playTrack }
+  return { 
+    tracks, 
+    currentTrack, 
+    volume, 
+    playing, 
+    shuffle, 
+    repeat, 
+    playbackPosition, 
+    playbackLength, 
+    playTrack 
+  }
 })
