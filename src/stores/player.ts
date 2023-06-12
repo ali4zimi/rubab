@@ -14,8 +14,8 @@ export const useMusicPlayer = defineStore('MusicPlayer', () => {
   const shuffle = ref(false);
   const repeat = ref(false);
 
-  const playbackPosition = ref(0);
-  const playbackLength = ref(0);
+  const playbackPosition = ref('0:00');
+  const playbackLength = ref('0:00');
 
   const audio = new Audio();
 

@@ -15,7 +15,8 @@ const user = useUserStore();
         <div class="my-list">
             <router-link :to="`/playlist/${playlist.slug}`" class="list-item" v-for="playlist in user.playlists" :key="playlist.id">
                 
-                <div class="track-art"></div>
+                <div class="track-art flex items-center justify-center text-red-400" v-html="playlist.icon">
+                </div>
                 <div class="track-detail">
                     <div>{{ playlist.name }}</div>
                     <div>{{ playlist.tracks.length }}</div>
@@ -44,7 +45,7 @@ const user = useUserStore();
 }
 
 .track-art {
-    @apply w-12 h-12 bg-green-400 rounded-md
+    @apply w-12 h-12 bg-white rounded-md
 }
 
 .track-details {

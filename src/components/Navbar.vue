@@ -16,11 +16,15 @@ import { RouterLink } from 'vue-router'
         </RouterLink>
         
         <div class="search">
-            Search bar
+            <div class="w-[400px] bg-white py-2 px-4 rounded-3xl">
+                <input type="text" class="w-full outline-none" placeholder="Search" />
+            </div>
         </div>
 
         <div class="menu">
-            Menu
+            <div class="w-10 h-10 bg-slate-600 border-2 border-white rounded-full overflow-hidden cursor-pointer">
+                <img src="https://i.pravatar.cc/300" class="w-full h-full" />
+            </div>
         </div>
     </header>
 </template>

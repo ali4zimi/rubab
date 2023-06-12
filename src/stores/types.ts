@@ -10,6 +10,7 @@ interface Track {
 interface Playlist {
     name: string;
     slug: string;
+    icon?: string;
     tracks: Track[];
 }
 
