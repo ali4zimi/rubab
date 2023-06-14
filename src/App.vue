@@ -23,6 +23,6 @@ main {
   @apply fixed top-[80px] bottom-[90px] left-[10px] right-[10px] z-10 flex gap-2;
 }
 .content {
-  @apply w-9/12  bg-slate-100 rounded-md overflow-hidden;
+  @apply w-9/12  bg-slate-100 rounded-md overflow-x-hidden overflow-y-scroll;
 }
 </style>
