@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { watch, ref } from 'vue';
+import { ref } from 'vue';
 import { useRoute } from 'vue-router';
 import { useUserStore } from '@/stores/user';
 import { useMusicPlayer } from '@/stores/player';
@@ -10,10 +10,6 @@ const player = useMusicPlayer();
 const user = useUserStore();
 const slug = route.params.slug;
 const playlist = ref(user.playlists.find((playlist) => playlist.slug === slug));
-
-watch(() => route.params.slug, (slug) => {
-    playlist.value = user.playlists.find((playlist) => playlist.slug === slug);
-});
 
 </script>
 

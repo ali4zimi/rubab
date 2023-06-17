@@ -13,7 +13,7 @@ import Sidebar from './components/Sidebar.vue'
     <Sidebar />
 
     <div class="content">
-      <RouterView />
+      <RouterView :key="$route.fullPath" />
     </div>
   </main>
 </template>
