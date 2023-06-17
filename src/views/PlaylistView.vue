@@ -19,7 +19,7 @@ const playlist = user.playlists[0]
     <div class="w-full">
         <header class="bg-slate-200 px-5 pt-28 pb-5 flex items-center gap-3 flex-nowrap">
             <div class="w-3/12 aspect-square flex justify-center items-center bg-white shadow-2xl">
-                <img v-if="playlist?.icon" :src="playlist?.icon" class="object-icon" />
+                <img v-if="playlist.cover" :src="playlist.cover" class="object-icon" />
                 <div class="track-art flex items-center justify-center text-red-400" v-html="playlist.icon">
                 </div>
             </div>
@@ -33,7 +33,7 @@ const playlist = user.playlists[0]
         <div class="p-5">
             <div class="flex flex-col">
                 <div class="list-head">
-                    <div class="p-3 flex justify-between">
+                    <div class="t-row bg-slate-200">
                         <div class="col">#</div>
                         <div class="col">Title</div>
                         <div class="col">Album</div>
@@ -41,13 +41,13 @@ const playlist = user.playlists[0]
                         <div class="col">Duration</div>
                     </div>
                 </div>
-                <div class="list-body">
-                    <div class="w-full flex hover:bg-slate-200 p-3" v-for="track in playlist">
-                        <div class="col w-1/12">1</div>
-                        <div class="col w-3/12">Album </div>
-                        <div class="col w-3/12">Artist </div>
-                        <div class="col w-3/12">02/22/2022</div>
-                        <div class="col w-2/12">0:00</div>
+                <div class="">
+                    <div class="t-row hover:bg-slate-200" v-for="track in playlist">
+                        <div class="">1</div>
+                        <div class="">Album </div>
+                        <div class="">Artist </div>
+                        <div class="">02/22/2022</div>
+                        <div class="">0:00</div>
                     </div>
                 </div>
             </div>
@@ -66,10 +66,16 @@ const playlist = user.playlists[0]
 }
 
 .row {
-    @apply p-3 flex justify-between hover:bg-slate-200 rounded-md
+    /* @apply p-3 flex justify-between hover:bg-slate-200 rounded-md */
 }
 
 .col {
-    @apply flex
+    /* @apply flex */
+}
+
+.t-row {
+    @apply grid p-3 ;
+    grid-template-columns: 0.3fr 2fr 1fr 1fr 1fr;
+    
 }
 </style>
