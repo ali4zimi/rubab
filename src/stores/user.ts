@@ -18,6 +18,20 @@ export const useUserStore = defineStore('UserStore', () => {
     playlists.value.push(defaultplaylist.value)
 
 
+
+    const createPlaylist = (() => {
+        const newPlaylist = ref<Playlist>({
+            name: 'New Playlist ' + (playlists.value.length + 1).toString(),
+            slug: 'new-playlist-' + (playlists.value.length + 1).toString(),
+            icon: '',
+            tracks: <Track[]>[]
+        });
+        
+        playlists.value.push(newPlaylist.value)
+    })
+
+
+
     const likeSong = ((track: Track) =>{
         defaultplaylist.value.tracks.push(track)
     })
@@ -30,5 +44,5 @@ export const useUserStore = defineStore('UserStore', () => {
 
 
 
-    return { username, playlists, likeSong, unlikeSong }
+    return { username, playlists, likeSong, unlikeSong, createPlaylist }
 });
