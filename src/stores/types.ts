@@ -11,6 +11,7 @@ interface Playlist {
     name: string;
     slug: string;
     icon?: string;
+    thumbnail?: string;
     tracks: Track[];
 }
 
