@@ -69,7 +69,7 @@ const showMore = (e: MouseEvent) => {
                         <div class="col">
                             <div class="flex gap-2">
                                 <div class="w-10 h-10 bg-green-400 rounded-md">
-                                    <img :src="track.thumbnail" class="w-full h-full rounded-md" />
+                                    <img :src="track.cover" class="w-full h-full rounded-md" />
                                 </div>
                                 <div>
                                     <div class="text-sm">{{ track.title }}</div>
