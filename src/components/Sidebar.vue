@@ -10,7 +10,10 @@ const user = useUserStore();
 
 <template>
     <div class="sidebar">
-        <h1 class="font-semibold">My Library</h1>
+        <div class="flex justify-between">
+            <h1 class="font-semibold">My Library</h1>
+            <div class="text-2xl font-bold" @click="user.createPlaylist()">+</div>
+        </div>
 
         <div class="my-list">
             <router-link :to="`/playlist/${playlist.slug}`" class="list-item" v-for="playlist in user.playlists" :key="playlist.id">
