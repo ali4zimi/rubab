@@ -11,6 +11,14 @@ const user = useUserStore();
 const slug = route.params.slug;
 const playlist = ref(user.playlists.find((playlist) => playlist.slug === slug));
 
+
+import TrackContextMenu from '@/components/TrackContextMenu.vue';
+
+const showMore = (e: MouseEvent) => {
+    const target = (e.target as HTMLElement).closest('.track-options');
+    console.log(target);
+    if (!target) return;
+}
 </script>
 
 <template>
@@ -47,7 +55,7 @@ const playlist = ref(user.playlists.find((playlist) => playlist.slug === slug));
                     </div>
                 </div>
                 <div class="list-body">
-                    <div class="row" v-for="track, index in playlist?.tracks">
+                    <div class="row" v-for="track, index in playlist?.tracks" @dblclick="player.playTrack(track)">
                         <div class="col">
                             <div>
                                 <div class="track-number">{{ index + 1 }}</div>
@@ -95,7 +103,7 @@ const playlist = ref(user.playlists.find((playlist) => playlist.slug === slug));
                             <div>02:25</div>
                         </div>
                         <div class="col">
-                            <div class="track-options">
+                            <div class="track-options" @click="showMore">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 16 16">
                                     <path fill="currentColor"
                                         d="M3 9.5a1.5 1.5 0 1 1 0-3a1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3a1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3a1.5 1.5 0 0 1 0 3z" />
@@ -106,8 +114,9 @@ const playlist = ref(user.playlists.find((playlist) => playlist.slug === slug));
                 </div>
             </div>
         </div>
-
     </div>
+
+    <!-- <TrackContextMenu /> -->
 </template>
 
 <style scoped>
