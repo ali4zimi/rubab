@@ -25,7 +25,7 @@ const showMore = (e: MouseEvent) => {
     <div class="w-full">
         <header class="bg-slate-200 px-5 pt-28 pb-5 flex items-center gap-3 flex-nowrap">
             <div class="w-3/12 aspect-square flex justify-center items-center bg-white shadow-2xl">
-                <img v-if="playlist?.cover" :src="playlist.cover" class="object-icon" />
+                <img v-if="playlist?.thumbnail" :src="playlist.thumbnail" class="object-icon" />
                 <div class="track-art flex items-center justify-center text-red-400" v-html="playlist?.icon">
                 </div>
             </div>
@@ -69,7 +69,7 @@ const showMore = (e: MouseEvent) => {
                         <div class="col">
                             <div class="flex gap-2">
                                 <div class="w-10 h-10 bg-green-400 rounded-md">
-                                    <img :src="track.cover" class="w-full h-full rounded-md" />
+                                    <img :src="track.thumbnail" class="w-full h-full rounded-md" />
                                 </div>
                                 <div>
                                     <div class="text-sm">{{ track.title }}</div>
