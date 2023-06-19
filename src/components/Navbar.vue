@@ -31,7 +31,7 @@ import { RouterLink } from 'vue-router'
 
 <style scoped>
 .navbar {
-    @apply fixed h-[70px] top-0 left-0 right-0 p-3 flex items-center justify-between z-30
+    @apply fixed h-[70px] top-0 left-0 right-0 p-3 flex items-center justify-between
 }
 
 .logo {
