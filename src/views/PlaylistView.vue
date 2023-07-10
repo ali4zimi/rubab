@@ -12,7 +12,7 @@ const slug = route.params.slug;
 const playlist = ref(user.playlists.find((playlist) => playlist.slug === slug));
 
 
-import TrackContextMenu from '@/components/TrackContextMenu.vue';
+// import TrackContextMenu from '@/components/TrackContextMenu.vue';
 
 const showMore = (e: MouseEvent) => {
     const target = (e.target as HTMLElement).closest('.track-options');
